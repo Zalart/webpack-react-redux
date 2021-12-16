@@ -1,11 +1,12 @@
 import React from 'react';
-import './repo.less';
-const Repo = (props) => {
+import './repoListItem.less';
+import {NavLink} from "react-router-dom";
+const RepoListItem = (props) => {
 const repo = props.repo;
     return (
         <div className="repo">
             <div className="repo-header">
-                <div className="repo-header-name">{repo.name}</div>
+                <div className="repo-header-name"><NavLink to="/repo">{repo.name}</NavLink></div>
                 <div className="repo-header-stars">{repo.stargazers_count}</div>
             </div>
             <div className="repo-description">{repo.description}</div>
@@ -15,4 +16,4 @@ const repo = props.repo;
     );
 };
 
-export default Repo;
+export default RepoListItem;

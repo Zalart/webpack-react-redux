@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import './main.less'
 import {useDispatch, useSelector} from "react-redux";
 import {getRepos} from "../../actions/repos";
-import Repo from "./repo/Repo";
+import RepoListItem from "./repo/repoListItem/RepoListItem";
 import {setCurrentPage} from "../../reducers/reposReducer";
 import {paginationCreator} from "../../utilities/paginationCreator";
 import {BUTTONS_PER_PAGE} from "../../utilities/constants";
@@ -34,7 +34,7 @@ useEffect(()=> {
         <div>
             <div className="search"><input value={searchValue} onChange={handleChangeValue} className="search-input" type="text"/>
                 <button className="btn" onClick={handleSearchClick}>Поиск</button></div>
-            {!isFetching ? repos.map((repo, i) => <Repo key={i} repo={repo}/>) : <div className="fetching"><span>Loading</span></div>}
+            {!isFetching ? repos.map((repo, i) => <RepoListItem key={i} repo={repo}/>) : <div className="fetching"><span>Loading</span></div>}
             <div className="pagination">
                 {pages && pages.map((page, index) =>
                     <span className={currentPage === page ? "page-active" : "page"}
