@@ -1,3 +1,5 @@
+import {PER_PAGE} from "../utilities/constants";
+
 const SET_REPOS = "SET_REPOS";
 const SET_IS_FETCHING = "SET_IS_FETCHING";
 const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
@@ -7,7 +9,7 @@ const defaultState = {
     items: [],
     isFetching: true,
     currentPage: 1,
-    perPage: 9,
+    perPage: PER_PAGE,
     totalCount: 0,
 }
 

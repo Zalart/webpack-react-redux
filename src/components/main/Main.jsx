@@ -4,46 +4,30 @@ import {useDispatch, useSelector} from "react-redux";
 import {getRepos} from "../../actions/repos";
 import Repo from "./repo/Repo";
 import {setCurrentPage} from "../../reducers/reposReducer";
+import {paginationCreator} from "../../utilities/paginationCreator";
+import {BUTTONS_PER_PAGE} from "../../utilities/constants";
 
 const Main = () => {
 const dispatch = useDispatch();
 const repos = useSelector(state => state.repos.items);
 const isFetching = useSelector(state=>state.repos.isFetching);
 const currentPage = useSelector(state=> state.repos.currentPage);
-const totalCount = useSelector(state=> state.repos.totalCount);
-const perPage = useSelector(state=> state.repos.perPage);
+const reposCount = useSelector(state=> state.repos.totalCount);
+const reposPerPage = useSelector(state=> state.repos.perPage);
 const [searchValue, setSearchValue] = useState("");
 
-
-const pagesCalc = (currentPage, perPage, totalCount) => {
-    let arr = [];
-    if (currentPage < Math.ceil(totalCount / perPage)) {
-        for (let i = 1; i <= perPage; i++ ) {
-            arr.push(i);
-        }
-        return arr;
-    } else if (currentPage < Math.ceil(totalCount / perPage) - Math.floor(perPage / 2)) {
-        for (let i = currentPage - Math.floor(perPage / 2); i <= currentPage + Math.floor(perPage / 2); i++ ) {
-            arr.push(i);
-        }
-        return arr;
-    }
-    else {
-
-    }
-}
-
-const pages = pagesCalc(currentPage, perPage, totalCount);
+const pagesButtons = [];
+const pages = paginationCreator(pagesButtons, currentPage, reposCount, reposPerPage, BUTTONS_PER_PAGE)
 
 const handleChangeValue = e => {
     setSearchValue(e.target.value);
 }
 const handleSearchClick = () => {
     dispatch(setCurrentPage(1));
-    dispatch(getRepos(searchValue, currentPage, perPage));
+    dispatch(getRepos(searchValue, currentPage, reposPerPage));
 }
 useEffect(()=> {
-    dispatch(getRepos(searchValue, currentPage, perPage));
+    dispatch(getRepos(searchValue, currentPage, reposPerPage));
 }, [currentPage])
 
     return (
