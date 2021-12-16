@@ -1,0 +1,70 @@
+.search {
+  width: 100%;
+  display: flex;
+
+  &-input {
+    width: 100%;
+    margin-right: .5rem;
+    padding: .5rem;
+    border: 1px gray solid;
+    border-radius: 2px;
+  }
+}
+.fetching {
+  width: 5rem;
+  height: 5rem;
+  border: 2px dashed red;
+  border-radius: 50%;
+  margin: 40vh auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  animation-name: fetching-disc;
+  animation-duration: 2000ms;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  & span {
+    color: red;
+  }
+}
+
+@keyframes fetching-disc {
+  0% {
+  transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg) scale(1.5)
+  }
+}
+.pagination {
+  display: flex;
+  margin: 1rem 0;
+  justify-content: flex-start;
+  align-items: center;
+  & .page, .page-active {
+    width: 2rem;
+    height: 2rem;
+    border: 2px solid gray;
+    border-radius: 50%;
+    margin: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+  & .page:hover {
+    border: 2px solid lightgray;
+    color: gray;
+  }
+  & .page:first-child, .page-active:first-child {
+    margin-left: 0;
+  }
+  & .page-active {
+    width: 2.3rem;
+    height: 2.3rem;
+    border: 2px solid black;
+    color: black;
+    font-weight: bold;
+  }
+}
